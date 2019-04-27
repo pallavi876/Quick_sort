@@ -1,0 +1,49 @@
+#include<stdio.h>
+
+void dnc(int,int);
+int partition(int,int);
+int a[20],i;
+void main()
+{
+    int n;
+    printf("\nEnter number:");
+    scanf("%d",&n);
+    printf("\nEnter elements to sort:\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    dnc(0,n-1);
+    printf("\nSorted array is:");
+    for(i=0;i<n;i++)
+        printf("\n%d\n",a[i]);
+}
+
+void dnc(int i,int j)
+{
+    int q;
+    if(i<j)
+    {   q=partition(i,j);
+        dnc(i,q-1);
+        dnc(q+1,j);
+    }
+}
+
+int partition(int s,int e)
+{
+    int temp,pivot,j,t,r;
+    pivot=a[e];
+    r=s-1;
+    for(j=s;j<e;j++)
+    {
+        if(a[j]<=pivot)
+        {
+            r=r+1;
+            temp=a[r];
+            a[r]=a[j];
+            a[j]=temp;
+        }
+    }
+    t=a[e];
+    a[e]=a[r+1];
+    a[r+1]=t;
+    return(r+1);
+}
